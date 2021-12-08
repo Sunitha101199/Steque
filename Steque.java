@@ -121,9 +121,28 @@ public class Steque<Item> implements Iterable<Item> {
      * 
      */
     public Iterator<Item> iterator() {
-        
+        return new StequeIterator();
     }
-    
+    public class StequeIterator implements Iterator<Item>{
+        Node current = first;
+ 
+        public boolean hasNext(){
+            return current!=null;
+        }
+        public Item next(){
+            if(!hasNext()){
+                throw new NoSuchElementException();
+            }
+            else{
+                Item item = current.item;
+                current = current.next;
+                return item;
+            }
+        }
+        public void remove(){
+            throw new NoSuchElementException();
+        }
+    }
     
     public static void main(String[] args){
         Steque<Integer> steque = new Steque<Integer>();
